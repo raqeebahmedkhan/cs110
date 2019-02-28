@@ -28,8 +28,6 @@ class HTTPRequest {
   
  public:
 
-  HTTPRequest(bool useProxy) : usingProxy(useProxy) {}
-
 /**
  * Ingests, parses, and stores the first line of the HTTP request.
  * Recall that the first line of any valid proxied HTTP request is
@@ -93,22 +91,6 @@ class HTTPRequest {
  */
   bool containsName(const std::string& name) const;
   
-/**
- * Adds (or updates) the provided name so that it's associated
- * with the provided value string.  Note that the name comparison is
- * case-insensitive, so that "Expires" and "EXPIRES" are the considered
- * the same.
- */
-  void addHeader(const std::string& name, const std::string& value);
-
-/**
- * Returns the string form of the value associated with the provided
- * name.  Note, as above, that the name comparison is case-insensitive,
- * so that "Expires" and "EXPIRES" are the considered the same.  If the
- * key isn't present, then the empty string is returned.
- */
-  const std::string& getHeaderValueAsString(const std::string& name) const;
-
  private:
   std::string requestLine;
   HTTPHeader requestHeader;
@@ -120,7 +102,6 @@ class HTTPRequest {
   unsigned short port;
   std::string path;
   std::string protocol;
-  bool usingProxy;
 };
 
 #endif
